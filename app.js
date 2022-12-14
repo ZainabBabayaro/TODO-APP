@@ -1,61 +1,42 @@
-
-const inputField = document.querySelector(".todo-input");
 const addButton = document.querySelector(".add-todo");
-const tasks = document.querySelector(".task");
-const check = document.querySelector(".button-1");
-let ol = document.createElement("ol");
-let li = document.createElement("li");
-const ol = document.querySelector(".todo-items");
-let p = document.createElement("p");
-let div = document.createElement("div");
-let button1 = document.createElement("button");
-let button2 = document.createElement("button");
 
 addButton.addEventListener("click", myfunc);
 
 function myfunc() {
-    p.textContent = inputField.value
-    button1.textContent = '✓'
-    button2.textContent = 'x'
-    button1.classList.add('button-1')
-    button2.classList.add('button-2')
-    li.classList.add('task')
-    div.appendChild(button1)
-    div.appendChild(button2)
-    li.appendChild(p)
-    li.appendChild(div)
-    ol.insertAdjacentElement('beforeend', li)
-    ol.innerHTML += li
+    const inputField = document.querySelector(".todo-input");
+    const todos = document.querySelector(".todo-items");
+
+    todos.innerHTML += `<li class="task">
+        <p>${inputField.value}</p>
+        <div>
+            <button class="button-1">✓</button>
+            <button class="button-2" onclick="deleteTodo(event)">𝑥</button>
+        </div>
+    </li>`
+
+    inputField.value = ''
+    totalTodos()
 }
 
-button2.addEventListener('click', function (event) {
+function deleteTodo (event) {
     event.preventDefault()
-    const target = event.target.parentNode.previousElementSibling.textContent
-    const lis = document.querySelectorAll('.task')
 
-    lis.forEach(element => {
+    const target = event.target.parentNode.previousElementSibling.textContent
+
+    const listOfTodos = document.querySelectorAll('.task')
+
+    listOfTodos.forEach(element => {
         if (element.children[0].textContent == target) {
             element.remove();
-  
         }
     });
-})
 
+    totalTodos()
+}
 
+function totalTodos() {
+    const todos = document.querySelectorAll(".task");
+    const todoCount = document.querySelector('.todo-count')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    todoCount.textContent = todos.length
+}
