@@ -1,3 +1,4 @@
+let total = 0
 const addButton = document.querySelector(".add-todo");
 
 addButton.addEventListener("click", myfunc);
@@ -14,7 +15,7 @@ function myfunc() {
         </div>
     </li>`
 
-    inputField.value = ''
+    inputField.value = '' 
     totalTodos()
     
 }
@@ -45,26 +46,26 @@ function totalTodos() {
 
 
 
-
 function completeTodo (event) {
-
+    
+     const completed = document.querySelector(".total-completed");
      const target = event.target.parentNode.previousElementSibling.textContent
      const listOfTodos = document.querySelectorAll('.task')
 
       listOfTodos.forEach(element => {
           if (element.children[0].textContent == target) {
               element.style.color = "lightgrey";
+              total++
+              completed.textContent=total
+              console.log(total)
           }
       });
 
-        totalCompleted()
+        
    
  }
 
 
 
-function totalCompleted(){
-     const completed = document.querySelector(".total-completed");
-   
-     completed.textContent = completeTodo.length;
-}
+
+ 
